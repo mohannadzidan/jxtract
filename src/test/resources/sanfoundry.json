@@ -1,0 +1,56 @@
+{
+  "script": {
+    "type": "jxtract.web",
+    "attributes": [
+      {
+        "name": "questions",
+        "method": {
+          "type": "querySelectorAll",
+          "args": {
+            "query": ".entry-content p"
+          }
+        }
+      },
+      {
+        "name": "answers",
+        "method": {
+          "type": "querySelectorAll",
+          "args": {
+            "query": "div.collapseomatic_content"
+          }
+        }
+      }
+    ]
+  },
+  "postProcessors": [
+    {
+      "type": "collections.filter",
+      "configuration": {
+        "attribute": "questions",
+        "regex" : "^\\d+\\..*"
+      }
+    },{
+      "type": "collections.filter",
+      "configuration": {
+        "attribute": "answers",
+        "regex" : "^Answer: \\w.*"
+      }
+    },
+    {
+      "type": "collections.merge",
+      "configuration": {
+        "map": {
+          "answers": "answer",
+          "questions": "question"
+        },
+        "destination": "questions"
+      }
+    },
+    {
+      "type": "attributes.remove",
+      "configuration": {
+        "attribute": "answers"
+      }
+    }
+  ]
+}

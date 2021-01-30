@@ -1,0 +1,40 @@
+{
+  "script": {
+    "type": "jxtract.web",
+    "attributes": [
+      {
+        "name": "movies",
+        "method": {
+          "type": "querySelectorAll",
+          "args": {
+            "query": "article.poster",
+            "script": {
+              "type": "jxtract.web",
+              "attributes": [
+                {
+                  "name": "title",
+                  "method": {
+                    "type": "querySelector",
+                    "args": {
+                      "query": "div.info h3"
+                    }
+                  }
+                },
+                {
+                  "name": "poster",
+                  "method": {
+                    "type": "querySelector",
+                    "args": {
+                      "query": "img[src]",
+                      "attribute": "src"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}
